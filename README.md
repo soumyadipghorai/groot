@@ -1,2 +1,2 @@
 # groot
-Ai image capturing app
+peace of shit
