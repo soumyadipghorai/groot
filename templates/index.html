@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Home</title>
+    <style>
+        .banner{
+            background-image: url('static/images/banner-image-3-lg.jpg');
+            background-repeat: no-repeat;
+            /* background-attachment: fixed; */
+            background-size:cover;
+        }
+        @media (max-width : 948px){
+            .banner{
+                background-image: url('static/images/banner-image-3.jpg');
+                background-repeat: no-repeat;
+                /* background-attachment: fixed; */
+                background-size:cover;
+            }
+        }
+        @media screen and (max-width : 480px){
+            .banner{
+                background-image: url('static/images/banner-image-3-sm.jpg');
+                background-repeat: no-repeat;
+                /* background-attachment: fixed; */
+                background-size:cover;
+            }
+        }
+    </style>
+{% endblock %}
+{% block body %}
+<div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 p-3">
+        <h2 class="display-5">Groot </h2>
+        <p class="lead">Groot is an AI based automated cartoonifying app</p>
+    </div>
+    <div class="bg-dark shadow-sm mx-auto banner" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+</div>
+{% endblock %} 
