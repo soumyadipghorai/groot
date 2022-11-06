@@ -16,18 +16,18 @@ def convertIntoGrootText(text) :
     return ["I am Groot" for i in range(grootCount)]
 
 def index(request) : 
-    text = {
-        'banner-text' : 'lorkjcdjcndem', 
-        'tech-used' : ['akmjancjnd', 'cnadcnd', 'dcjadcnd'], 
+    context = {
+        "bannerText" : "Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.", 
+        "techUsed" : ['akmjancjnd', 'cnadcnd', 'dcjadcnd'], 
         'image-text' : ['ckdnc', 'adjdjn', 'sdjvndjn']
-    }
+    } 
     if True : 
-        for key in text.keys() : 
-            text[key] = convertIntoGrootText(text[key])
+        for key in context.keys() : 
+            context[key] = convertIntoGrootText(context[key])
     # if request.user.is_anonymous : 
     #     return ('/login')
-    print(text)
-    return render(request, 'index.html', text)
+    print(context)
+    return render(request, 'index.html', context)
 
 def loginPage(request) : 
     return render(request, 'login.html')

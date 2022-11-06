@@ -6,7 +6,7 @@
     <title>Login</title>
 {% endblock %}
 {% block body %}
-<section class="contact-me" id="contact-me">
+{% comment %} <section class="contact-me" id="contact-me">
     <div class="row">
         <div class="col-lg-5 image-container ">
             <!-- <div class="image-container"> -->
@@ -36,5 +36,25 @@
             </div>
         </div>
     </div>
-</section>
+</section> {% endcomment %}
+    <div class="box">
+        <div class="form">
+            <h2>SIGN IN</h2>
+            <div class="inputBox">
+                <input type="text" required>
+                <span>Username</span>
+                <i></i>
+            </div>
+            <div class="inputBox">
+                <input type="password" required>
+                <span>Password</span>
+                <i></i>
+            </div>
+            <div class="links">
+                <a href="#">Forget password</a>
+                <a href="#">Signup</a>
+            </div>
+            <input type="submit" value="Login">
+        </div>
+    </div>
 {% endblock %}
