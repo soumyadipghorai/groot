@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
+{% block css %} 
+    <link rel="stylesheet" href="../static/styles/index.css">
+{% endblock %}
 {% block title %}
     <title>Home</title>
 {% endblock %}
 {% block body %}
 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-10 col-sm-8 col-lg-6">
+    <div class="col-10 col-sm-8 col-lg-6 banner-image">
         <img src="static/images/groot-banner-image.jpg" class="d-block mx-lg-auto img-fluid" style="max-width:300px; border:10px;" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
     </div> 
     <div class="col-lg-6">
         <h1 class="display-5 fw-bold lh-1 mb-3">Groot</h1>
-        <p class="lead">
-            {% for text in bannerText %}
-                {{text}}
-            {% endfor %}
+        <p class="lead fs-5 col-md-8">
+            Quickly capture image with changed background using AI and automation.
         </p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="/play"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Take Picture</button></a>
-            <a href="/result"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Upload Image</button></a>
+            <a href="/Imageupload"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Take Picture</button></a>
+            <a href="/"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Upload Image</button></a>
         </div>
     </div>
 </div>
@@ -30,9 +31,6 @@
             <div>
                 <h3 class="fs-2">Featured title</h3>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                {% comment %} <a href="#" class="btn btn-primary">
-                    Primary button
-                </a> {% endcomment %}
             </div>
         </div>
         <div class="col d-flex align-items-start">
@@ -42,9 +40,6 @@
             <div>
                 <h3 class="fs-2">Featured title</h3>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                {% comment %} <a href="#" class="btn btn-primary">
-                    Primary button
-                </a> {% endcomment %}
             </div>
         </div>
         <div class="col d-flex align-items-start">
@@ -54,9 +49,6 @@
             <div>
                 <h3 class="fs-2">Featured title</h3>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                {% comment %} <a href="#" class="btn btn-primary">
-                    Primary button
-                </a> {% endcomment %}
             </div>
         </div>
     </div>
