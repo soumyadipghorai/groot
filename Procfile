@@ -1,1 +1,1 @@
-web: gunicorn groot.wsgi
+web: gunicorn app:app
