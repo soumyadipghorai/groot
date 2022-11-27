@@ -2,7 +2,9 @@ from flask import Flask, render_template, request, session
 import os
 from werkzeug.utils import secure_filename
 import cv2
-import numpy as np
+from flask_sqlalchemy import SQLAlchemy
+import pyrebase 
+
 
 UPLOAD_FOLDER = 'static/uploads/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -11,9 +13,25 @@ app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
  
-app.secret_key = 'This is your secret key to utilize session in Flask'
+# config = {
+#     'apiKey': "AIzaSyB2rhB-iVdfihzWhYwuhK8i9ZmE78vA0YU",
+#     'authDomain': "groot-2d621.firebaseapp.com",
+#     'projectId': "groot-2d621",
+#     'storageBucket': "groot-2d621.appspot.com",
+#     'messagingSenderId': "917162023467",
+#     'appId': "1:917162023467:web:550f3abb96f4514a8f686e",
+#     'measurementId': "G-4Y9NFD7GLT", 
+#     'databaseURL' : ''
+# }
 
- 
+# firebase = pyrebase.initialize_app((config))
+# auth = firebase.auth() 
+
+# app.secret_key = "this is my secret key"
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password123@localhost/users'
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -22,7 +40,7 @@ def index():
 def abput():
     return render_template('about.html')
 
-@app.route('/login')
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     return render_template('loginNew.html')
 
