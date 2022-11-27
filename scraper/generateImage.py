@@ -24,16 +24,16 @@ if __name__ == "__main__" :
     etheni_female_storing_path = '../data/ethenic/ethenicfemaleImages/ethenicFemaleImage'
 
     print('generating tshirt')
-    generateImage(tshirt_df_path, tshirt_storing_path)
+    #generateImage(tshirt_df_path, tshirt_storing_path)
 
     print('generating formals')
-    generateImage(formals_df_path, formals_storing_path)
+    #generateImage(formals_df_path, formals_storing_path)
 
     print('generating ethenic')
-    generateImage(ethenic_df_path, ethenic_storing_path)
+    #generateImage(ethenic_df_path, ethenic_storing_path)
 
     print('generating ethenic feamle')
-    generateImage(etheni_female_df_path, tshirt_storing_path)
+    #generateImage(etheni_female_df_path, tshirt_storing_path)
 
     print('generating latop')
     generateImage(tshirt_df_path, tshirt_storing_path)
