@@ -3,6 +3,7 @@ import os
 from werkzeug.utils import secure_filename
 import cv2
 from flask_sqlalchemy import SQLAlchemy
+import sqlite3
 import pyrebase 
 
 
@@ -13,41 +14,61 @@ app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
  
-# config = {
-#     'apiKey': "AIzaSyB2rhB-iVdfihzWhYwuhK8i9ZmE78vA0YU",
-#     'authDomain': "groot-2d621.firebaseapp.com",
-#     'projectId': "groot-2d621",
-#     'storageBucket': "groot-2d621.appspot.com",
-#     'messagingSenderId': "917162023467",
-#     'appId': "1:917162023467:web:550f3abb96f4514a8f686e",
-#     'measurementId': "G-4Y9NFD7GLT", 
-#     'databaseURL' : ''
-# }
+ 
+# firebase authetication 
+config = {
+    'apiKey': "AIzaSyB2rhB-iVdfihzWhYwuhK8i9ZmE78vA0YU",
+    'authDomain': "groot-2d621.firebaseapp.com",
+    'projectId': "groot-2d621",
+    'storageBucket': "groot-2d621.appspot.com",
+    'messagingSenderId': "917162023467",
+    'appId': "1:917162023467:web:550f3abb96f4514a8f686e",
+    'measurementId': "G-4Y9NFD7GLT", 
+    'databaseURL' : ""
+};
 
-# firebase = pyrebase.initialize_app((config))
-# auth = firebase.auth() 
+firebase = pyrebase.initialize_app(config)
+auth = firebase.auth() 
 
-# app.secret_key = "this is my secret key"
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password123@localhost/users'
-
+app.secret_key = 'secret'
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/about')
-def abput():
+def about():
     return render_template('about.html')
 
-@app.route('/login', methods = ['GET', 'POST'])
-def login():
+@app.route("/signUp")
+def signUp() : 
+    return render_template("signUp.html")
+
+
+@app.route('/login', methods = ['POST', 'GET'])
+def login() : 
+    if ('user' in session) : 
+        return render_template('index.html')
+    if request.method == 'POST' : 
+        email = request.form.get('email') 
+        password = request.form.get('password') 
+        try : 
+            user = auth.sign_in_with_email_and_password(email, password)
+            session['user'] = email 
+            return render_template('index.html')
+        except : 
+            return render_template('loginNew.html')  
     return render_template('loginNew.html')
+
+@app.route('/logout')    
+def logout() : 
+    session.pop('user')
+    return render_template('index.html')
 
 @app.route('/Imageupload')
 def uploadPage() : 
     return render_template('index_upload_and_display_image.html')
- 
+
 @app.route('/Imageupload',  methods=("POST", "GET"))
 def uploadFile():
     if request.method == 'POST':
@@ -57,7 +78,7 @@ def uploadFile():
         session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
  
         return render_template('index_upload_and_display_image_page2.html')
- 
+
 
 def color_quantization(img, k):
     data = np.float32(img).reshape((-1, 3))

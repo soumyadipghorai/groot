@@ -6,47 +6,52 @@
     <title>Home</title>
 {% endblock %}
 {% block body %}
-<div class="flex-lg-row-reverse align-items-center g-5 py-5 hero-header">
-    <!-- <div class="col-10 col-sm-8 col-lg-6 banner-image">
-        <img src="static/images/groot-banner-image.jpg" class="d-block mx-lg-auto img-fluid" style="max-width:300px; border:10px;" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-    </div>  -->
-    <!-- <div > -->
-        <div class="container">
-            <h1>Groot</h1>
-            <p>
-                Quickly capture image with changed background using AI and automation.
-            </p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a href="/Imageupload"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Take Picture</button></a>
-                <a href="/"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Upload Image</button></a>
-            </div>
+<div class="flex-lg-row-reverse align-items-center g-5 py-5 hero-header" style="background-image: url({{url_for('static', filename='images/hero-image.jpg')}})">
+    <div class="hero-image-container">
+        <h1>Groot</h1>
+        <p>
+            Quickly capture image with changed background using AI and automation. 
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="/Imageupload"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Take Picture</button></a>
+            <a href="/"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Upload Image</button></a>
         </div>
-    <!-- </div> -->
+    </div>
 </div>
-<div class="container px-4 py-5" id="hanging-icons">
+<div class="container px-4 py-5 reveal fade-bottom" id="hanging-icons">
     <h2 class="pb-2 border-bottom">Tech Used</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="col d-flex align-items-start">
+        <div class="col d-flex align-items-start reveal fade-bottom">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+                <!-- <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-filetype-py" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2H7v-1h5a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM0 11.85h1.6c.289 0 .533.06.732.179.201.117.355.276.46.477.105.201.158.427.158.677 0 .25-.054.476-.16.677-.106.199-.26.357-.464.474a1.452 1.452 0 0 1-.732.173H.79v1.342H0V11.85Zm2.06 1.714a.795.795 0 0 0 .085-.381c0-.227-.062-.4-.185-.521-.123-.122-.294-.182-.513-.182H.788v1.406h.66a.794.794 0 0 0 .374-.082.574.574 0 0 0 .238-.24Zm2.963.75v1.535H4.23v-1.52L2.89 11.85h.876l.853 1.696h.032l.856-1.696h.855l-1.339 2.464Z"/>
+                </svg>
             </div>
             <div>
                 <h3 class="fs-2">Featured title</h3>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
             </div>
         </div>
-        <div class="col d-flex align-items-start">
+        <div class="col d-flex align-items-start reveal fade-bottom1">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
+                <!-- <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
+                    <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z"/>
+                </svg>
             </div>
             <div>
                 <h3 class="fs-2">Featured title</h3>
                 <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
             </div>
         </div>
-        <div class="col d-flex align-items-start">
+        <div class="col d-flex align-items-start reveal fade-bottom2">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"></use></svg>
+                <!-- <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"></use></svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-database-check" viewBox="0 0 16 16">
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514Z"/>
+                    <path d="M12.096 6.223A4.92 4.92 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.493 4.493 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.525 4.525 0 0 1-.813-.927C8.5 14.992 8.252 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.552 4.552 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10c.262 0 .52-.008.774-.024a4.525 4.525 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777ZM3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4Z"/>
+                </svg>
             </div>
             <div>
                 <h3 class="fs-2">Featured title</h3>
@@ -55,12 +60,12 @@
         </div>
     </div>
 </div>
-<div class="container px-4 py-5" id="custom-cards">
+<div class="container px-4 py-5 reveal fade-bottom" id="custom-cards">
     <h2 class="pb-2 border-bottom">Why we are all Groot</h2>
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
         <div class="col">
-            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('static/images/banner-image-2.jpg'); background-size:cover;">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg reveal fade-bottom" style="background-image: url('static/images/banner-image-2.jpg'); background-size:cover;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">We are young</h3>
                     <ul class="d-flex list-unstyled mt-auto">
@@ -81,7 +86,7 @@
         </div>
 
         <div class="col">
-            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('static/images/groot-image-2.jpg'); background-size:cover;">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg reveal fade-bottom1" style="background-image: url('static/images/groot-image-2.jpg'); background-size:cover;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">We all make mistakes</h3>
                     <ul class="d-flex list-unstyled mt-auto">
@@ -102,7 +107,7 @@
         </div>
 
         <div class="col">
-            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('static/images/groot-image-1.jpg'); background-size:cover;">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg reveal fade-bottom2" style="background-image: url('static/images/groot-image-1.jpg'); background-size:cover;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">We also get angry</h3>
                     <ul class="d-flex list-unstyled mt-auto">

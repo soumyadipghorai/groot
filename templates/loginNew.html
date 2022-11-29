@@ -1,10 +1,43 @@
 {% extends 'base.html'%}
 {% block css %} 
 <link rel="stylesheet" href="../static/styles/login.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 {% endblock %}
 {% block title %}
     <title>Login</title>
 {% endblock %}
 {% block body %}
+    <!-- <center>
+        <form method="POST">
+            <input type="text" name="username" placeholder="User Name">
+            <input type="text" name="email" placeholder="email">
+            <input type="password" name="password" id="" placeholder="Password">
+            <input type="submit" name="submit" id="">
+        </form>
+    </center> -->
 
+    <section class="contact-me" id="contact-me">
+        <div class="row">
+            <div class="col-lg-5 image-container ">
+                <img src="https://c4.wallpaperflare.com/wallpaper/24/975/637/groot-marvel-comics-baby-groot-hd-wallpaper-preview.jpg" alt="">
+            </div>
+            <div class="col-lg-7">
+                <div class="form-text">
+                    <h2>Log In</h2>
+                    <p>Login to the world of groot...</p>
+                    <form method="POST" autocomplete="off" >
+                        <div class="form-group">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" required name="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <input type="submit" name="submit" id="" class="submit-button">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

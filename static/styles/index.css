@@ -1,12 +1,48 @@
 .banner-image img{
     border-radius: 5px;
 } 
-
+.hero-image-container{
+    margin-top: 7%;
+    margin-left: 7%;
+}
 .hero-header{
-    background-image: url(static/images/hero_image.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position:right center;
-    height: 480px;
+    height: 500px;
     color: white;
 }
+
+.resume-button{
+    background-color: var(--primaryColor);
+    color: white;
+    padding: 1% 3% 1% 3%;
+    border-radius: var(--borderRadius);
+    border: 0px;
+    margin-right: 20px;
+    text-transform: uppercase;
+    box-shadow: var(--boxShadowStyle);
+}
+    .resume-button:hover{
+        box-shadow: none;
+        cursor: pointer;
+        transition: 0.1s linear;
+    }
+
+.hire-me-button{
+    background-color: white;
+    color: var(--primaryColor);
+    padding: 1% 3% 1% 3%;
+    border: 0.5px solid white;
+    border-radius: var(--borderRadius);
+    margin-right: 20px;
+    box-shadow: var(--boxShadowStyle);
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+    .hire-me-button:hover{
+        box-shadow: 0px 0px 0px 0px;
+        transition: 0.1s linear;
+        border: 0.5px solid var(--bordercolor);
+    }
