@@ -86,7 +86,8 @@ def uploadFile():
     if request.method == 'POST':
         uploaded_img = request.files['uploaded-file']
         img_filename = secure_filename(uploaded_img.filename)
-        img_filename = remove(img_filename)
+        image = cv2.imread(img_filename)
+        img_filename = remove(image)
         uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
         session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
  
@@ -107,6 +108,7 @@ def color_quantization(img, k):
 @app.route('/show_image')
 def displayImage():
     img_file_path = session.get('uploaded_img_file_path', None)
+    # img_file_path = remove(open(img_file_path))
     return render_template('show_image.html', user_image = img_file_path)
  
 if __name__=='__main__':
