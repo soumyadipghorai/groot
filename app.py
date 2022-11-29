@@ -5,7 +5,7 @@ import cv2
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 import pyrebase 
-
+from rembg import remove 
 
 UPLOAD_FOLDER = 'static/uploads/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -60,6 +60,18 @@ def login() :
             return render_template('loginNew.html')  
     return render_template('loginNew.html')
 
+# @app.route('/signUp', methos = ['GET', 'POST'])
+# def signUp() :
+#     if request.method == 'POST' : 
+#         email = request.form.get('email')
+#         password = request.form.get('password')
+#         try : 
+#             user = auth.create_user_with_email_and_password(email, password)
+#             return render_template('loginNew.html')
+#         except : 
+#             pass 
+    
+
 @app.route('/logout')    
 def logout() : 
     session.pop('user')
@@ -74,6 +86,7 @@ def uploadFile():
     if request.method == 'POST':
         uploaded_img = request.files['uploaded-file']
         img_filename = secure_filename(uploaded_img.filename)
+        img_filename = remove(img_filename)
         uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
         session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
  
