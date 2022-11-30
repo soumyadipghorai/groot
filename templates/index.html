@@ -7,21 +7,21 @@
 {% endblock %}
 {% block body %}
 <div class="flex-lg-row-reverse align-items-center g-5 py-5 hero-header" style="background-image: url({{url_for('static', filename='images/hero-image.jpg')}})">
-    <div class="hero-image-container">
+    <div class="hero-image-container" style="width : 500px;">
         <h1>Groot</h1>
         <p>
-            Quickly capture image with changed background using AI and automation. 
+            Bored with sad backgrounds? Quickly capture or Upload image and get cool background recommendations by AI  
         </p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="/Imageupload"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Take Picture</button></a>
-            <a href="/"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Upload Image</button></a>
+            <a href="/Imageupload"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Upload Image</button></a>
+            <a href="/captureImage"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Take Picture</button></a>
         </div>
     </div>
 </div>
-<div class="container px-4 py-5 reveal fade-bottom" id="hanging-icons">
+<div class="container px-4 py-5 " id="hanging-icons">
     <h2 class="pb-2 border-bottom">Tech Used</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="col d-flex align-items-start reveal fade-bottom">
+        <div class="col d-flex align-items-start reveal fade-bottom tech-used-container">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
                 <!-- <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg> -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-filetype-py" viewBox="0 0 16 16">
@@ -33,7 +33,7 @@
                 <p>Python is used as a mojor component of this project. All the data collection, preprocessing and model training are done in python. Libraries cv2, os, Numpy, pandas, pickle are used extensively </p>
             </div>
         </div>
-        <div class="col d-flex align-items-start reveal fade-bottom1">
+        <div class="col d-flex align-items-start reveal fade-bottom1 tech-used-container">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
                 <!-- <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg> -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
@@ -45,7 +45,7 @@
                 <p>For detecting objects in the image we have used yolo V5 along with custom implementation. For this we have considered around 85 classes. Robo flow is used to train on custom images.</p>
             </div>
         </div>
-        <div class="col d-flex align-items-start reveal fade-bottom2">
+        <div class="col d-flex align-items-start reveal fade-bottom2 tech-used-container">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
                 <!-- <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"></use></svg> -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-database-check" viewBox="0 0 16 16">
@@ -65,7 +65,7 @@
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
         <div class="col">
-            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg reveal fade-bottom" style="background-image: url('static/images/banner-image-2.jpg'); background-size:cover;">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg reveal fade-bottom image-card" style="background-image: url('static/images/banner-image-2.jpg'); background-size:cover;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">We are young</h3>
                     <ul class="d-flex list-unstyled mt-auto">
