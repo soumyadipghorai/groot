@@ -3,13 +3,13 @@
 <link rel="stylesheet" href="../static/styles/captureImage.css">
 {% endblock %}
 {% block title %}
-    <title>Capture Image</title>
+    <title>Result</title>
 {% endblock %}
 {% block body %}
     <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img id="video" src="{{ url_for('video_viewer') }}" class="video-streaming img-fluid" alt="streaming-video" width="500" height="500" loading="lazy">
+                <img src="{{ user_image }}" alt="Captured Image" class="video-streaming img-fluid" width="500" height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
                 <form action="" method="POST">
@@ -17,7 +17,7 @@
                     <p class="lead">Quickly capture or Upload image and get cool background recommendations by AI.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <input type="submit" value="Capture Image" name="click" class="btn btn-primary btn-lg px-4 me-md-2"/>
-                    <a href="/Imageupload"><button type="button" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Upload Image</button></a>
+                    <input type="submit" value="Make Cartoon" name="predict" class="btn btn-outline-secondary btn-lg px-4 me-md-2"/>
                     </div>
                 </form>
             </div>

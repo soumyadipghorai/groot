@@ -2,11 +2,11 @@ import numpy as np
 from PIL import Image 
 from rembg import remove 
 from threading import Thread
+from camera import VideoCamera
 from rich.logging import RichHandler 
 from werkzeug.utils import secure_filename
-import os, sys, cv2, time, pyrebase, pickle, logging, datetime
+import os, sys, cv2, time, pyrebase, pickle, datetime, logging as LOGGING
 from flask import Flask, render_template, request, session, Response, jsonify, redirect, url_for
-from camera import VideoCamera
 
 # sign up logout 
 # image capture 
@@ -14,12 +14,12 @@ from camera import VideoCamera
 # bg recommendation
 # pop up message
 
-# logging messages 
+# LOGGING messages 
 FORMAT = "%(message)s"
-logging.basicConfig(
+LOGGING.basicConfig(
     level="NOTSET", format=FORMAT, datefmt="[%X]", handlers=[RichHandler()]
 )  
-logger = logging.getLogger("rich")
+logger = LOGGING.getLogger("rich")
 
 # upload image 
 UPLOAD_FOLDER = 'static/uploads/'
@@ -62,17 +62,20 @@ def signUp() :
 @app.route('/login', methods = ['POST', 'GET'])
 def login() : 
     if ('user' in session) : 
-        # return render_template('index.html')
         return redirect(url_for('index'))
+    
     if request.method == 'POST' : 
         email = request.form.get('email') 
         password = request.form.get('password') 
+        
         try : 
             user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = email 
             return redirect(url_for('index'))
+        
         except : 
             return render_template('loginNew.html')  
+    
     return render_template('loginNew.html')
 
 @app.route('/logout')    
@@ -87,10 +90,12 @@ def uploadPage() :
 @app.route('/Imageupload',  methods=("POST", "GET"))
 def uploadFile():
     if request.method == 'POST':
+    
         uploaded_img = request.files['uploaded-file']
         img_filename = secure_filename(uploaded_img.filename)
         uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
         session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
+    
         return render_template('index_upload_and_display_image_page2.html')
 
 # cartoonifying using clustering 
@@ -116,7 +121,6 @@ def convertImage(input_image_path, output_image_path):
     datas = img.getdata()
  
     newData = []
- 
     for item in datas:
         if item[0] == 255 and item[1] == 255 and item[2] == 255:
             newData.append((255, 255, 255, 0))
@@ -133,9 +137,10 @@ def image_processing_pipeline() :
     
     rembg_curr = time.time()
     output = remove(image)  
-    logging.debug('background remove time --> ' + str(time.time() - rembg_curr))
+    LOGGING.debug('background remove time --> ' + str(time.time() - rembg_curr))
     
     image_file_name = img_file_path.split('/')[-1].split('.')[0]
+    LOGGING.debug('Extracted image file name --> ' + str(image_file_name))
 
     background = Image.open('static/backgrounds/mountain.jpg')
     backgroundcopy = background.copy()
@@ -144,16 +149,23 @@ def image_processing_pipeline() :
     bg_removed_path = 'static/bg_removed/'+ image_file_name
     cv2.imwrite(bg_removed_path+'bg_removed.png',output)
     
-    convertImage(input_image_path= bg_removed_path+'bg_removed.png', output_image_path= 'static/transperantbg/'+ image_file_name + 'bg_removed_trans.png')
+    convertImage(
+        input_image_path= bg_removed_path+'bg_removed.png', 
+        output_image_path= 'static/transperantbg/'+ image_file_name + 'bg_removed_trans.png'
+        )
     
     foregraound = Image.open('static/transperantbg/'+ image_file_name + 'bg_removed_trans.png')
     foregraoundCopy = foregraound.copy() 
     foregraoundCopy = foregraoundCopy.convert("RGBA")
 
     pasting_curr = time.time()
-    backgroundcopy.paste(foregraoundCopy, (int((background.width - foregraound.width)/2), background.height - foregraound.height), foregraoundCopy) #(x, y)
+    backgroundcopy.paste(
+            foregraoundCopy, 
+            (int((background.width - foregraound.width)/2), background.height - foregraound.height), 
+            foregraoundCopy
+        ) #(x, y)
 
-    logging.debug("pasting image time --> " + str(time.time() - pasting_curr))
+    LOGGING.debug("pasting image time --> " + str(time.time() - pasting_curr))
     bg_changed_path = 'static/bg_changed/'+ image_file_name
     backgroundcopy.save(bg_changed_path+'bg_changed.png')
 
@@ -161,7 +173,7 @@ def image_processing_pipeline() :
 
     # k_means_curr = time.time()
     # recommended_image = color_quantization(changed_img, 14)
-    # logging.debug("k_means cartoon time --> " +str(time.time() - k_means_curr))
+    # LOGGING.debug("k_means cartoon time --> " +str(time.time() - k_means_curr))
     
     filter_curr = time.time()
     colored_image=cv2.bilateralFilter(changed_img,9,350,350)
@@ -169,7 +181,7 @@ def image_processing_pipeline() :
     smooth_grayscale=cv2.medianBlur(grayscale_image,5)
     image_edge=cv2.adaptiveThreshold(smooth_grayscale,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,9,9)
     recommended_image = cv2.bitwise_and(colored_image,colored_image,mask=image_edge)
-    logging.debug("filter time --> " + str(time.time() - filter_curr))
+    LOGGING.debug("filter time --> " + str(time.time() - filter_curr))
 
 
     cartoonified_path = 'static/cartoonified/'+ image_file_name
@@ -182,7 +194,7 @@ def image_processing_pipeline() :
 def displayImage():
     image_processing_pipeline()
     img_file_path = session['preprocessed_image']
-
+    LOGGING.debug('uploaded image path --> '+ str(img_file_path))
     return render_template('show_image.html', user_image = img_file_path)
 
 
@@ -190,16 +202,43 @@ def displayImage():
 def captureImage():
     if request.method == 'POST' : 
         if request.form.get('click') == 'Capture Image':
-            logging.debug('catpure pressed')
+            
+            LOGGING.debug('catpure pressed')
+            
             camera = cv2.VideoCapture(0)
             success, frame = camera.read()
             now = datetime.datetime.now()
-            p = os.path.sep.join(['shots', "shot_{}.png".format(str(now).replace(":",''))])
+            p = os.path.sep.join(['static/shots', "shot_{}.png".format(str(now).replace(":",''))])
             cv2.imwrite(p, frame) 
-            logging.debug('path saved --> '+ str(p))
-            logging.debug('image saved')
+            
+            LOGGING.debug('path saved --> '+ str(p))
+            LOGGING.debug('image saved')
+            
+            session['uploaded_img_file_path'] = p.replace('\\', '/') 
+            
+            return redirect(url_for('caturedImagePage'))
+
     return render_template('captureImage.html')
     
+@app.route('/caturedImagePage', methods = ['GET', 'POST'])    
+def caturedImagePage() : 
+    
+    image_file_path = session['uploaded_img_file_path']
+    image_file_path = image_file_path.replace('\\', '/')
+    
+    LOGGING.debug('Captured_image_path --> ' + str(image_file_path))
+    
+    if request.method == 'POST' : 
+    
+        if request.form.get('click') == 'Capture Image' : 
+            LOGGING.debug('button pressed from captured Image page ')
+            return redirect(url_for('captureImage'))
+    
+        if request.form.get('predict') == 'Make Cartoon' : 
+            return redirect(url_for('displayImage'))
+    
+    return render_template('caturedImagePage.html', user_image = image_file_path)
+
 
 def video_stream():
     video_camera = None
@@ -226,6 +265,3 @@ def video_viewer():
    
 if __name__=='__main__':
     app.run(debug = True, threaded=True)
-
-camera.release()
-cv2.destroyAllWindows()
